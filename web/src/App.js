@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +19,7 @@ import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
 import Footer from './components/Footer';
+import { useDispatch } from 'react-redux';
 
 firebase.initializeApp({
   apiKey: "AIzaSyCQlW-x22eqNBBVAP897ACBqBDlSi70WFE",
@@ -32,11 +33,14 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 
-const App = ({ dispatch }) => {
+const App = () => {
   const [user] = useAuthState(auth);
-  if(user){
-    dispatch(login(user.email, user.uid))
-  }
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(login(user?.email, user?.uid));
+  }, [user])
+
   return (
     <Fragment>
       <Router>
