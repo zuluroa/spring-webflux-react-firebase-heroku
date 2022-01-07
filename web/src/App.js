@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +18,7 @@ import QuestionFormPage from './pages/QuestionFormPage'
 import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
+import Footer from './components/Footer';
 
 firebase.initializeApp({
   apiKey: "AIzaSyCQlW-x22eqNBBVAP897ACBqBDlSi70WFE",
@@ -37,7 +38,8 @@ const App = ({ dispatch }) => {
     dispatch(login(user.email, user.uid))
   }
   return (
-    <Router>
+    <Fragment>
+      <Router>
       {user ?
         <>
           <PrivateNavbar />
@@ -67,6 +69,8 @@ const App = ({ dispatch }) => {
         </>
       }
     </Router>
+    <Footer/>
+    </Fragment>
   )
 }
 
