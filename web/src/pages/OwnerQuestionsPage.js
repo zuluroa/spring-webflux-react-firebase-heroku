@@ -1,30 +1,51 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchOwnerQuestions, deleteQuestion } from '../actions/questionActions'
 import { Question } from '../components/Question'
+import swal from 'sweetalert';
 
-const OwnerQuestionsPage = ({ dispatch, loading, questions, hasErrors, redirect, userId }) => {
+const OwnerQuestionsPage = () => {
+    const questions = useSelector(state => state.question);
+    const userId = useSelector(state => state.auth.uid);
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchOwnerQuestions(userId))
     }, [dispatch, userId]);
 
     useEffect(() => {
-        if (redirect) {
+        if (questions.redirect) {
             dispatch(fetchOwnerQuestions(userId))
         }
-    }, [redirect, dispatch, userId]);
+    }, [questions.redirect, dispatch, userId]);
 
     const onDelete = (id) => {
-        dispatch(deleteQuestion(id))
+        swal({
+            title: "¿Eliminar?",
+            text: "¡Recuerda, al eliminar no podrás recuperar esta pregunta!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((eliminar) => {
+                if (eliminar) {
+                    swal("¡Se ha eliminado con exito!", {
+                        icon: "success",
+                    });
+                    dispatch(deleteQuestion(id))
+                } else {
+                    swal("uff, que bueno que preguntamos");
+                }
+            });
     }
 
-
     const renderQuestions = () => {
-        if (loading) return <p>Loading questions...</p>
-        if (hasErrors) return <p>Unable to display questions.</p>
+        if (questions.loading) return <p>Loading questions...</p>
+        if (questions.hasErrors) return <p>Unable to display questions.</p>
 
-        return questions.map(question => <Question
+        return questions.questions.map(question => <Question
             key={question.id}
             question={question}
             excerpt onDelete={onDelete} />)
@@ -38,12 +59,4 @@ const OwnerQuestionsPage = ({ dispatch, loading, questions, hasErrors, redirect,
     )
 }
 
-const mapStateToProps = state => ({
-    loading: state.question.loading,
-    questions: state.question.questions,
-    hasErrors: state.question.hasErrors,
-    redirect: state.question.redirect,
-    userId: state.auth.uid
-})
-
-export default connect(mapStateToProps)(OwnerQuestionsPage)
+export default OwnerQuestionsPage
