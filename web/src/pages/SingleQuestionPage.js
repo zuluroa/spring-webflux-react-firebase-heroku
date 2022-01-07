@@ -24,7 +24,23 @@ const SingleQuestionPage = ({ match }) => {
   }, [questions.redirect, dispatch, userId]);
 
   const onDelete = (id) => {
-    dispatch(deleteAnswer(id))
+    swal({
+      title: "¿Eliminar?",
+      text: "¡Recuerda, al eliminar no podrás recuperar esta respuesta!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+  })
+      .then((eliminar) => {
+          if (eliminar) {
+              swal("¡Se ha eliminado con exito!", {
+                  icon: "success",
+              });
+              dispatch(deleteAnswer(id))
+          } else {
+              swal("uff, que bueno que preguntamos");
+          }
+      });
   }
 
   const renderQuestion = () => {
