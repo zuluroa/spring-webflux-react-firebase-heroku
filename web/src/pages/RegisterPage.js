@@ -1,10 +1,8 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { useSelector } from 'react-redux';
 import { signup } from '../config/auth';
 
 const Register = () => {
-    const question = useSelector(state => state.question);
     const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
@@ -12,7 +10,6 @@ const Register = () => {
             signup(data.email, data.password);
         } catch (error) {
             console.log("ERROR REGISTRARSE", error.message)
-            // this.setState({ error: error.message });
         }
     };
 
@@ -32,18 +29,17 @@ const Register = () => {
                         placeholder="Email"
                         name="email"
                         type="email"
-                        {...register("email", { required: true, maxLength:20 })}
+                        {...register("email", { required: true, maxLength:100 })}
                     />
                     <input
                         className="form-control"
                         placeholder="Password"
                         name="password"
                         type="password"
-                        {...register("password", { required: true, maxLength:20 })}
+                        {...register("password", { required: true, maxLength:50 })}
                     />
                 </div>
 
-                {question.hasErrors ? <p>Hubo un error al registrarse.</p> : null}
                 <button className="boton-cerrar" type="submit">Registrar Email</button>
                 <hr />
             </form>

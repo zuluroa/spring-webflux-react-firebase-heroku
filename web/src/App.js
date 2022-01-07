@@ -14,7 +14,8 @@ import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import Footer from './components/Footer';
 import { useDispatch } from 'react-redux';
-import Register from "./pages/Register"
+import Register from "./pages/RegisterPage"
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -52,6 +53,7 @@ const App = () => {
             <Route exact path="/question/:id" component={SingleQuestionPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={LoginPage} />
             <Redirect to="/" />
           </Switch>
         </>
