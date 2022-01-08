@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { postQuestion } from '../actions/questionActions'
 import { useSelector, useDispatch } from 'react-redux'
+import { TextArea } from "../components/TextArea";
 
 const FormPage = () => {
     const questions = useSelector(state => state.question);
@@ -10,10 +11,12 @@ const FormPage = () => {
     const dispatch = useDispatch();
     
     const { register, handleSubmit } = useForm();
+    const [content, setContent] = useState('');
     const history = useHistory();
 
     const onSubmit = data => {
         data.userId = userId;
+        data.question = content;
         dispatch(postQuestion(data));
     };
 
@@ -51,7 +54,8 @@ const FormPage = () => {
                 </div>
                 <div>
                     <label htmlFor="question">Question</label>
-                    <textarea id="question" {...register("question", { required: true, maxLength: 300 })} />
+                    
+                    <TextArea  setContent={setContent} />
                 </div>
                 <button type="submit" className="button" disabled={questions.loading} >{
                     questions.loading ? "Saving ...." : "Save"
