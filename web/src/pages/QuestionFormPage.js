@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { postQuestion } from '../actions/questionActions'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-const FormPage = ({ dispatch, loading, redirect, userId }) => {
+const FormPage = () => {
+    const questions = useSelector(state => state.question);
+    const userId = useSelector(state => state.auth.uid);
+    const dispatch = useDispatch();
+    
     const { register, handleSubmit } = useForm();
     const history = useHistory();
 
@@ -14,10 +18,10 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
     };
 
     useEffect(() => {
-        if (redirect) {
-            history.push(redirect);
+        if (questions.redirect) {
+            history.push(questions.redirect);
         }
-    }, [redirect, history])
+    }, [questions.redirect, history])
 
     return (
         <section>
@@ -26,7 +30,7 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div>
-                    <label for="type">Type</label>
+                    <label htmlFor="type">Type</label>
                     <select {...register("type")} id="">
                         <option value="OPEN (LONG OPEN BOX)">OPEN (LONG OPEN BOX)</option>
                         <option value="OPINION (SHORT OPEN BOX)">OPINION (SHORT OPEN BOX)</option>
@@ -35,7 +39,7 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
                     </select>
                 </div>
                 <div>
-                    <label for="category">Category</label>
+                    <label htmlFor="category">Category</label>
                     <select {...register("category")} id="category">
                         <option value="TECHNOLOGY AND COMPUTER">TECHNOLOGY AND COMPUTER</option>
                         <option value="SCIENCES">SCIENCES</option>
@@ -45,13 +49,12 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
 
                     </select>
                 </div>
-
                 <div>
-                    <label for="question">Question</label>
+                    <label htmlFor="question">Question</label>
                     <textarea id="question" {...register("question", { required: true, maxLength: 300 })} />
                 </div>
-                <button type="submit" className="button" disabled={loading} >{
-                    loading ? "Saving ...." : "Save"
+                <button type="submit" className="button" disabled={questions.loading} >{
+                    questions.loading ? "Saving ...." : "Save"
                 }</button>
             </form>
         </section>
@@ -59,11 +62,4 @@ const FormPage = ({ dispatch, loading, redirect, userId }) => {
     );
 }
 
-const mapStateToProps = state => ({
-    loading: state.question.loading,
-    redirect: state.question.redirect,
-    hasErrors: state.question.hasErrors,
-    userId: state.auth.uid
-})
-
-export default connect(mapStateToProps)(FormPage)
+export default FormPage

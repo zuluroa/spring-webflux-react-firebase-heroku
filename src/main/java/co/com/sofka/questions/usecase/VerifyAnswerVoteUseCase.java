@@ -20,7 +20,7 @@ public class VerifyAnswerVoteUseCase {
     }
 
     public Mono<AnswerDTO> verifyAnswerVote(AnswerDTO answerDTO){
-        return answerRepository.findByUserAndId(answerDTO.getId(), answerDTO.getUserId())
+        return answerRepository.findByUserIdAndId(answerDTO.getId(), answerDTO.getUserId())
                 .switchIfEmpty(Mono.error(new IllegalAccessException("Usuario no autorizado")))
                 .flatMap(response -> {
                     if (answerDTO.getVote() == 0){
