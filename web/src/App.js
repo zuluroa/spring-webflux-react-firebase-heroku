@@ -22,7 +22,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(login(user?.email, user?.uid));
+    dispatch(login(user?.email, user?.uid, user?.displayName,user?.photoURL));
   }, [user])
 
   return (
@@ -30,10 +30,10 @@ const App = () => {
       <Router>
       {user ?
         <>
-          <PrivateNavbar />
+          <PrivateNavbar > <SignOut dispatch={dispatch} /></PrivateNavbar>
           <Switch>
             <Route exact path="/" component={() => {
-              return <HomePage><SignOut dispatch={dispatch} /></HomePage>
+              return <HomePage/>
             }} />
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
@@ -47,7 +47,7 @@ const App = () => {
           <PublicNavbar />
           <Switch>
             <Route exact path="/" component={() => {
-              return <HomePage><SignIn dispatch={dispatch} /></HomePage>
+              return <HomePage />
             }} />
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
@@ -72,7 +72,7 @@ function SignOut({ dispatch }) {
   return (
     auth.currentUser && (
       <button
-        className="button right"
+        className="btn btn-outline-primary"
         onClick={() => {
           dispatch(logout())
           auth.signOut();

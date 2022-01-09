@@ -30,23 +30,22 @@ const SingleQuestionPage = ({ match }) => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-  })
+    })
       .then((eliminar) => {
-          if (eliminar) {
-              swal("¡Se ha eliminado con exito!", {
-                  icon: "success",
-              });
-              dispatch(deleteAnswer(id))
-          } else {
-              swal("uff, que bueno que preguntamos");
-          }
+        if (eliminar) {
+          swal("¡Se ha eliminado con exito!", {
+            icon: "success",
+          });
+          dispatch(deleteAnswer(id))
+        } else {
+          swal("uff, que bueno que preguntamos");
+        }
       });
   }
 
   const renderQuestion = () => {
     if (questions.loading.question) return <p>Loading question...</p>
     if (questions.hasErrors.question) return <p>Unable to display question.</p>
-
     return <Question question={questions.question} />
   }
 
@@ -58,13 +57,18 @@ const SingleQuestionPage = ({ match }) => {
 
   return (
     <section>
-      {renderQuestion()}
-      {userId && <Link to={"/answer/" + id} className="button right">
-        Reply
-      </Link>}
+      <div className="container-md shadow p-5 mb-3 bg-white rounded form-group">
+        {renderQuestion()}
+        <br></br>
+        {userId && <Link to={"/answer/" + id} className="button right">
+          Reply
+        </Link>}
 
-      <h2>Answers</h2>
-      {renderAnswers()}
+        <h2>Answers</h2>
+        <hr></hr>
+        <br></br>
+        {renderAnswers()}
+      </div>
     </section>
   )
 }
