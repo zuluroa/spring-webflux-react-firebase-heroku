@@ -19,7 +19,9 @@ const QuestionsPage = () => {
 
     return (
         <section>
-            <h1>Questions</h1>
+            <h1 className='text-center p-4'>Questions</h1>
+            <hr></hr>
+            <br></br>
             {renderQuestions()}
         </section>
     )

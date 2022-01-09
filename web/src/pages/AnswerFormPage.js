@@ -23,7 +23,7 @@ const FormPage = ({ match }) => {
         data.userEmail = auth.email;
         data.questionId = id;
         data.answer = content;
-        data.photoUrl = user.photo;
+        data.photoUrl = auth.photo;
         dispatch(postAnswer(data));
     };
 
