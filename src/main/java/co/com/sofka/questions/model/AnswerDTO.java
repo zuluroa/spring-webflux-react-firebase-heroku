@@ -50,6 +50,15 @@ public class AnswerDTO {
         this.photoUrl = photoUrl;
     }
 
+    public AnswerDTO(String id, String userId, String questionId, String answer, String userEmail, String photoUrl) {
+        this.id = id;
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.userEmail = userEmail;
+        this.photoUrl = photoUrl;
+    }
+
     public String getId() {
         return id;
     }
