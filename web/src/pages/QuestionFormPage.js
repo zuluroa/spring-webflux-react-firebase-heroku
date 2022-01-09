@@ -7,16 +7,17 @@ import { TextArea } from "../components/TextArea";
 
 const FormPage = () => {
     const questions = useSelector(state => state.question);
-    const userId = useSelector(state => state.auth.uid);
+    const user = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    
+
     const { register, handleSubmit } = useForm();
     const [content, setContent] = useState('');
     const history = useHistory();
 
     const onSubmit = data => {
-        data.userId = userId;
+        data.userId = user.uid;
         data.question = content;
+        data.photoUrl = user.photo;
         dispatch(postQuestion(data));
     };
 
@@ -28,41 +29,43 @@ const FormPage = () => {
 
     return (
         <section>
-            <h1>New Question</h1>
+            <div className="container-md shadow p-4 mb-3 bg-white rounded form-group mx-10">
+                <h1 className="pt-2 text-center">New Question</h1>
+                <hr></hr>
+                <form onSubmit={handleSubmit(onSubmit)}>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+                    <div>
+                        <label htmlFor="type">Type</label>
+                        <select {...register("type")} id="">
+                            <option value="OPEN (LONG OPEN BOX)">OPEN (LONG OPEN BOX)</option>
+                            <option value="OPINION (SHORT OPEN BOX)">OPINION (SHORT OPEN BOX)</option>
+                            <option value="WITH RESULT (OPEN BOX WITH LINK)">WITH RESULT (OPEN BOX WITH LINK)</option>
+                            <option value="WITH EVIDENCE (OPEN BOX WITH VIDEO)">WITH EVIDENCE (OPEN BOX WITH VIDEO)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="category">Category</label>
+                        <select {...register("category")} id="category">
+                            <option value="TECHNOLOGY AND COMPUTER">TECHNOLOGY AND COMPUTER</option>
+                            <option value="SCIENCES">SCIENCES</option>
+                            <option value="SOFTWARE DEVELOPMENT">SOFTWARE DEVELOPMENT</option>
+                            <option value="SOCIAL SCIENCES">SOCIAL SCIENCES</option>
+                            <option value="LANGUAGE">LANGUAGE</option>
 
-                <div>
-                    <label htmlFor="type">Type</label>
-                    <select {...register("type")} id="">
-                        <option value="OPEN (LONG OPEN BOX)">OPEN (LONG OPEN BOX)</option>
-                        <option value="OPINION (SHORT OPEN BOX)">OPINION (SHORT OPEN BOX)</option>
-                        <option value="WITH RESULT (OPEN BOX WITH LINK)">WITH RESULT (OPEN BOX WITH LINK)</option>
-                        <option value="WITH EVIDENCE (OPEN BOX WITH VIDEO)">WITH EVIDENCE (OPEN BOX WITH VIDEO)</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="category">Category</label>
-                    <select {...register("category")} id="category">
-                        <option value="TECHNOLOGY AND COMPUTER">TECHNOLOGY AND COMPUTER</option>
-                        <option value="SCIENCES">SCIENCES</option>
-                        <option value="SOFTWARE DEVELOPMENT">SOFTWARE DEVELOPMENT</option>
-                        <option value="SOCIAL SCIENCES">SOCIAL SCIENCES</option>
-                        <option value="LANGUAGE">LANGUAGE</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="question">Question</label>
 
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="question">Question</label>
-                    
-                    <TextArea  setContent={setContent} />
-                </div>
-                <button type="submit" className="button" disabled={questions.loading} >{
-                    questions.loading ? "Saving ...." : "Save"
-                }</button>
-            </form>
+                        <TextArea setContent={setContent} />
+                    </div>
+                    <br></br>
+                    <button type="submit" className="btn btn-outline-primary btn-lg" disabled={questions.loading} >{
+                        questions.loading ? "Saving ...." : "Save"
+                    }</button>
+                </form>
+            </div>
         </section>
-
     );
 }
 

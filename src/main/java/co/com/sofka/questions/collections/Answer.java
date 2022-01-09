@@ -12,6 +12,7 @@ public class Answer {
     private String answer;
     private Integer position;
     private Integer vote;
+    private String photoUrl;
 
     public Integer getPosition() {
         return position;
@@ -51,6 +52,14 @@ public class Answer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public Integer getVote() {

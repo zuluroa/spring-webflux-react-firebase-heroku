@@ -12,6 +12,7 @@ public class Question {
     private String question;
     private String type;
     private String category;
+    private String photoUrl;
 
 
     public String getId() {
@@ -52,5 +53,13 @@ public class Question {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

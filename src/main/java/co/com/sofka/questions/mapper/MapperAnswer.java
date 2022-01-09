@@ -17,6 +17,7 @@ public class MapperAnswer {
             answer.setAnswer(updateAnswer.getAnswer());
             answer.setPosition(updateAnswer.getPosition());
             answer.setVote(updateAnswer.getVote());
+            answer.setPhotoUrl(updateAnswer.getPhotoUrl());
             return answer;
         };
     }
@@ -26,7 +27,8 @@ public class MapperAnswer {
                 entity.getId(),
                 entity.getUserId(),
                 entity.getQuestionId(),
-                entity.getAnswer()
+                entity.getAnswer(),
+                entity.getPhotoUrl()
         );
     }
 }

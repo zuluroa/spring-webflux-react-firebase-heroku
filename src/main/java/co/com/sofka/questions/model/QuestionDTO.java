@@ -17,6 +17,8 @@ public class QuestionDTO {
     private String type;
     @NotBlank
     private String category;
+    @NotBlank
+    private String photoUrl;
     private List<AnswerDTO> answers;
 
 
@@ -37,6 +39,15 @@ public class QuestionDTO {
         this.question = question;
         this.type = type;
         this.category = category;
+    }
+
+    public QuestionDTO(String id, String userId, String question, String type, String category, String photoUrl) {
+        this.id = id;
+        this.userId = userId;
+        this.question = question;
+        this.type = type;
+        this.category = category;
+        this.photoUrl = photoUrl;
     }
 
     public List<AnswerDTO> getAnswers() {
@@ -86,6 +97,14 @@ public class QuestionDTO {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override
