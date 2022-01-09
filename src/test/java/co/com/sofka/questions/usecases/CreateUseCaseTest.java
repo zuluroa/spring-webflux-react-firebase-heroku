@@ -12,7 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CreateUseCaseTest {
@@ -27,15 +26,21 @@ class CreateUseCaseTest {
     void createQuestion(){
 
         var questionDto = new QuestionDTO(
-                "1",
+                "001",
+                "xxxx",
                 "¿Qué es SpingBoot?",
+                "SOFTWARE DEVELOPMENT",
                 "OPEN",
-                "SOFTWARE DEVELOPMENT"
+                "photoURL.com"
         );
 
         var question = new Question();
         question.setId("001");
-        question.setQuestion("¿En que año");
+        question.setUserId("xxxx");
+        question.setQuestion("¿Qué es SpingBoot?");
+        question.setType("SOFTWARE DEVELOPMENT");
+        question.setCategory("OPEN");
+        question.setPhotoUrl("photoURL.com");
 
 
         Mockito.when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));

@@ -6,6 +6,7 @@ import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecase.question.ListUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Flux;
@@ -13,6 +14,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 class ListUseCaseTest {
 
     @MockBean

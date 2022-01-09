@@ -2,10 +2,8 @@ package co.com.sofka.questions.router;
 
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.usecase.FinAllByCategory;
-import co.com.sofka.questions.usecase.OwnerListUseCase;
-import co.com.sofka.questions.usecase.VerifyAnswerVoteUseCase;
-import co.com.sofka.questions.usecase.VerifyUserUseCase;
+import co.com.sofka.questions.model.UserDto;
+import co.com.sofka.questions.usecase.*;
 import co.com.sofka.questions.usecase.answer.DeleteAnswerUseCase;
 import co.com.sofka.questions.usecase.question.*;
 import org.springframework.context.annotation.Bean;
@@ -124,41 +122,38 @@ public class QuestionRouter {
         );
     }
 
+
     @Bean
-    public RouterFunction<ServerResponse> findAllByCategory(FinAllByCategory finAllByCategory) {
+    public RouterFunction<ServerResponse> createUser(CreateUserUseCase createUserUseCase){
+        return route(POST("/createUser").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(UserDto.class)
+                        .flatMap(userDto -> createUserUseCase.apply(userDto)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        ).onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> updateUser(UpdateUserUseCase updateUserUseCase){
+        return route(POST("/updateUser").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(UserDto.class)
+                        .flatMap(userDto -> updateUserUseCase.apply(userDto)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        ).onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> findUser(FindUserByIdUseCase findUserByIdUseCase) {
         return route(
-                GET("/filterCategory/{category}").and(accept(MediaType.APPLICATION_JSON)),
+                GET("/user/{id}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(finAllByCategory.apply(request.pathVariable("category")), QuestionDTO.class))
-                        .onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
-        );
-    }
-
-    @Bean
-    public RouterFunction<ServerResponse> userUseCase(VerifyUserUseCase verifyUserUseCase) {
-        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO ->  verifyUserUseCase.verifyUserQuestion(questionDTO)
-                .flatMap(result -> ServerResponse.ok()
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .bodyValue(result));
-
-        return route(
-                PUT("/verifyUserQuestion").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(QuestionDTO.class).flatMap(executor)
-                        .onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
-        );
-    }
-
-    @Bean
-    public RouterFunction<ServerResponse> answerVoteUseCase(VerifyAnswerVoteUseCase verifyAnswerVoteUseCase) {
-        Function<AnswerDTO, Mono<ServerResponse>> executor = answerDTO ->  verifyAnswerVoteUseCase.verifyAnswerVote(answerDTO)
-                .flatMap(result -> ServerResponse.ok()
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .bodyValue(result));
-
-        return route(
-                PUT("/verifyAnswerVote").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(AnswerDTO.class).flatMap(executor)
+                        .body(BodyInserters.fromPublisher(findUserByIdUseCase.findUserById(request.pathVariable("id")), UserDto.class))
                         .onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
         );
     }
