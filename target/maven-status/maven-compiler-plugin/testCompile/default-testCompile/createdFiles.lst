@@ -1,0 +1,12 @@
+co\com\sofka\questions\usecases\DeleteUseCaseTest.class
+co\com\sofka\questions\usecases\GetUseCaseTest.class
+co\com\sofka\questions\usecases\DeleteAnswerUseCaseTest.class
+co\com\sofka\questions\usecases\OwnerListUseCaseTest.class
+co\com\sofka\questions\usecases\UpdateUseCaseTest.class
+co\com\sofka\questions\QuestionsApplicationTests.class
+co\com\sofka\questions\usecases\UpdateUserUseCaseTest.class
+co\com\sofka\questions\usecases\CreateUseCaseTest.class
+co\com\sofka\questions\usecases\CreateUserUseCaseTest.class
+co\com\sofka\questions\usecases\AddAnswerUseCaseTest.class
+co\com\sofka\questions\usecases\FindUserByIdUseCaseTest.class
+co\com\sofka\questions\usecases\ListUseCaseTest.class
