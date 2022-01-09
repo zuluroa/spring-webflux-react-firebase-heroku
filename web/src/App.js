@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch,Route, Redirect,} from 'react-router-dom'
 
-import { login, logout } from './actions/authActions';
+import { login, logout, postUser } from './actions/authActions';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth,signInWithGoogle } from './config/auth';
+import { auth } from './config/auth';
 
 import { PublicNavbar, PrivateNavbar } from './components/Navbar'
 import HomePage from './pages/HomePage'
@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import { useDispatch } from 'react-redux';
 import Register from "./pages/RegisterPage"
 import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -23,6 +24,13 @@ const App = () => {
 
   useEffect(() => {
     dispatch(login(user?.email, user?.uid, user?.displayName,user?.photoURL));
+    if(user?.uid,user?.displayName,user?.email){
+      var data = {};
+      data.id = user.uid;
+      data.displayName = user.displayName;
+      data.email = user.email;
+      dispatch(postUser(data));
+    }
   }, [user])
 
   return (
@@ -40,6 +48,7 @@ const App = () => {
             <Route exact path="/list" component={OwnerQuestionsPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
             <Route exact path="/new" component={QuestionFormPage} />
+            <Route exact path="/user" component={ProfilePage} />
             <Redirect to="/" />
           </Switch>
         </> :
@@ -62,10 +71,6 @@ const App = () => {
     <Footer/>
     </Fragment>
   )
-}
-
-function SignIn() {
-  return <button className="button right" onClick={signInWithGoogle}>Sign in with google</button>;
 }
 
 function SignOut({ dispatch }) {
