@@ -17,7 +17,7 @@ const FormPage = () => {
     const onSubmit = data => {
         data.userId = user.uid;
         data.question = content;
-        data.photoUrl = user.photo;
+        data.photoUrl = user.photo ? user.photo : "https://i.ibb.co/1rkvVY3/foto-anonimus-profile.png";
         dispatch(postQuestion(data));
     };
 
