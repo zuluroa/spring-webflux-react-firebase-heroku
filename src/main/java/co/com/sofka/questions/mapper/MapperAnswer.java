@@ -15,8 +15,6 @@ public class MapperAnswer {
             answer.setUserId(updateAnswer.getUserId());
             answer.setQuestionId(updateAnswer.getQuestionId());
             answer.setAnswer(updateAnswer.getAnswer());
-            answer.setPosition(updateAnswer.getPosition());
-            answer.setVote(updateAnswer.getVote());
             answer.setPhotoUrl(updateAnswer.getPhotoUrl());
             return answer;
         };
