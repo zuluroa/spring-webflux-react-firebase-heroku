@@ -11,8 +11,8 @@ const QuestionsPage = () => {
     const [search, setSearch] = useState('');
     const [categorySearch, setcategorySearch] = useState('');
 
-    let questionFilterCategory = questions.questions.filter(question => question.category.toUpperCase().includes(categorySearch.toUpperCase()));
-    let questionFilterSearch = questionFilterCategory.filter(question => question.question.toUpperCase().includes(search.toUpperCase()));
+    let questionFilterCategory = questions.questions.filter(question => question?.category?.toUpperCase().includes(categorySearch.toUpperCase()));
+    let questionFilterSearch = questionFilterCategory.filter(question => question?.question?.toUpperCase().includes(search.toUpperCase()));
 
     const goTOVariable = questionFilterSearch[0]?.id;
     
