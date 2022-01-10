@@ -10,17 +10,8 @@ public class Answer {
     private String userId;
     private String questionId;
     private String answer;
-    private Integer position;
-    private Integer vote;
     private String photoUrl;
 
-    public Integer getPosition() {
-        return position;
-    }
-
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
 
     public String getId() {
         return id;
@@ -60,13 +51,5 @@ public class Answer {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
-    }
-
-    public Integer getVote() {
-        return vote;
-    }
-
-    public void setVote(Integer vote) {
-        this.vote = vote;
     }
 }

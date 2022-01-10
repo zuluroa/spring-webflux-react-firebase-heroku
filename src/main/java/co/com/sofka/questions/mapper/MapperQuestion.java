@@ -18,6 +18,7 @@ public class MapperQuestion {
             question.setQuestion(updateQuestion.getQuestion());
             question.setType(updateQuestion.getType());
             question.setPhotoUrl(updateQuestion.getPhotoUrl());
+            question.setUserEmail(updateQuestion.getUserEmail());
             return question;
         };
     }
@@ -29,7 +30,8 @@ public class MapperQuestion {
                 entity.getQuestion(),
                 entity.getType(),
                 entity.getCategory(),
-                entity.getPhotoUrl()
+                entity.getPhotoUrl(),
+                entity.getUserEmail()
         );
     }
 

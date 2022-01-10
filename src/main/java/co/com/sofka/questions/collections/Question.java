@@ -13,6 +13,7 @@ public class Question {
     private String type;
     private String category;
     private String photoUrl;
+    private String userEmail;
 
 
     public String getId() {
@@ -61,5 +62,13 @@ public class Question {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }

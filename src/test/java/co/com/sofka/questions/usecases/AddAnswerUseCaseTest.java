@@ -29,8 +29,8 @@ class AddAnswerUseCaseTest {
     @Test
     void addAnswerTest() {
 
-        var questionDTO = new QuestionDTO("001", "¿Test OK?", "OPEN", "TECHNOLOGY", "zuluroa@gmail", "photoUrl.com");
-        var answerDTO = new AnswerDTO("xxx", "1234", "001", "test ok","prueba@gmnail.com","photoUrl.com");
+        var questionDTO = new QuestionDTO("001", "XXXX", "¿Test OK?", "OPEN", "TECHNOLOGY", "photoUrl.com","zuluroa@gmail");
+        var answerDTO = new AnswerDTO("xxx", "1234", "001", "test ok","photoUrl.com");
 
         var answer = new Answer();
         answer.setId("xxx");

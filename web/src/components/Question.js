@@ -8,9 +8,9 @@ export const Question = ({ question, excerpt, onDelete, setcategorySearch }) => 
   }
 
   return <article className={excerpt ? 'question-excerpt' : 'question'}>
-    <div class="row">
+    <div className="row">
 
-      <div class="col-md-auto">
+      <div className="col-md-auto">
         <img src={question.photoUrl ? question.photoUrl : "https://i.ibb.co/1rkvVY3/foto-anonimus-profile.png"}></img>
       </div>
 

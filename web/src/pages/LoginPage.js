@@ -16,26 +16,26 @@ const LoginPage = () => {
     };
 
     return (
-        <div class="container-fluid ps-md-0">
-            <div class="row g-0">
-                <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
-                <div class="col-md-8 col-lg-6">
-                    <div class="login d-flex align-items-center py-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-9 col-lg-8 mx-auto">
-                                    <h1 class="login-heading mb-4  text-center"> Iniciar Sesión</h1>
+        <div className="container-fluid ps-md-0">
+            <div className="row g-0">
+                <div className="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+                <div className="col-md-8 col-lg-6">
+                    <div className="login d-flex align-items-center py-5">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-9 col-lg-8 mx-auto">
+                                    <h1 className="login-heading mb-4  text-center"> Iniciar Sesión</h1>
                                     <p className="login-heading mb-4  text-center">Complete el formulario para iniciar sesión.</p>
                                     <form form className="mt-5  px-5" onSubmit={handleSubmit(onSubmit)}>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control"
+                                        <div className="form-floating mb-3">
+                                            <input className="form-control"
                                                 placeholder="Email"
                                                 name="email"
                                                 type="email"
                                                 {...register("email", { required: true, maxLength: 100 })} />
                                             <label for="floatingInput">Correo Electronico</label>
                                         </div>
-                                        <div class="form-floating mb-3">
+                                        <div className="form-floating mb-3">
                                             <input className="form-control"
                                                 placeholder="Password"
                                                 name="password"
@@ -43,8 +43,8 @@ const LoginPage = () => {
                                                 {...register("password", { required: true, maxLength: 50 })} />
                                             <label for="floatingPassword">Contraseña</label>
                                         </div>
-                                        <div class="d-grid">
-                                            <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar Sesión</button>
+                                        <div className="d-grid">
+                                            <button className="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Iniciar Sesión</button>
                                             <hr />
                                             <button
                                                 className="btn btn-lg btn-danger btn-login text-uppercase fw-bold mb-2"

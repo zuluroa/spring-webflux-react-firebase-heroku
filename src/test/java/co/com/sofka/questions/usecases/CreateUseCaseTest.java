@@ -25,14 +25,7 @@ class CreateUseCaseTest {
     @Test
     void createQuestion(){
 
-        var questionDto = new QuestionDTO(
-                "001",
-                "xxxx",
-                "¿Qué es SpingBoot?",
-                "SOFTWARE DEVELOPMENT",
-                "OPEN",
-                "photoURL.com"
-        );
+        var questionDto = new QuestionDTO("001", "XXXX", "¿Test OK?", "OPEN", "TECHNOLOGY", "photoUrl.com","zuluroa@gmail");
 
         var question = new Question();
         question.setId("001");

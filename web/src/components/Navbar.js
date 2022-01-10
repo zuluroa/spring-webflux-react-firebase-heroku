@@ -17,7 +17,7 @@ export const PublicNavbar = () => (
 
 export const PrivateNavbar = ({ children }) => (
   <nav className="navbar navbar-expand-lg navbar-black bg-black shadow-lg p-3 bg-body rounded">
-    <div class="container-fluid">
+    <div className="container-fluid">
       <a className="navbar-brand" href="/">
         <img src="https://i.ibb.co/sqN9W1J/logo-Pet-project.png" width="50%" height="50%" />
       </a>

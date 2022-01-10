@@ -23,7 +23,7 @@ class OwnerListUseCaseTest {
 
     @Test
     void ownerListTest(){
-        var questionDTO = new QuestionDTO("xxx", "yyyy", "Que es Java?", "OPEN", "TECNOLOGIA", "photoUrl.com");
+        var questionDTO = new QuestionDTO("001", "XXXX", "¿Test OK?", "OPEN", "TECHNOLOGY", "photoUrl.com","zuluroa@gmail");
 
         var question = new Question();
         question.setId("xxx");

@@ -28,7 +28,7 @@ class UpdateUseCaseTest {
     @Test
     void updateTest(){
 
-        var resourceDT0 = new QuestionDTO("xxxx", "yyyy", "Que es Java?", "tecnologia", "TECNOLOGIA","PHOTOURL.com");
+        var resourceDT0 = new QuestionDTO("xxxx", "yyyy", "¿Test OK?", "OPEN", "TECHNOLOGY", "photoUrl.com","zuluroa@gmail");
 
         var resource = new Question();
         resource.setId("xxxx");

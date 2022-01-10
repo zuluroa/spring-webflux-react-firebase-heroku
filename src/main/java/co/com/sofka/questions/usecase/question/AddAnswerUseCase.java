@@ -45,7 +45,7 @@ public class AddAnswerUseCase implements SaveAnswer, SendEmailService {
                 answerRepository.save(mapperUtils.answerDtoToAnswer().apply(answerDTO))
                         .map(answer -> {
                             question.getAnswers().add(answerDTO);
-                            var res = sendEmail(answerDTO.getUserEmail(), "Tienes una nueva respuesta a tu pregunta",
+                            var res = sendEmail(question.getUserEmail(), "Tienes una nueva respuesta a tu pregunta",
                                     "Vuelve a Questions Sofka-u para revisar tu nueva respuesta! "
                                             + question.getQuestion());
                             return question;
